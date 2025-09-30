@@ -17,14 +17,31 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-configure gd --with-freetype --with-jpeg \
   && docker-php-ext-install gd zip pdo pdo_mysql
 
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy composer files first for better layer caching
+COPY composer.json composer.lock ./
+
+# Install PHP dependencies (will be cached if composer files haven't changed)
+RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloader
+
+# Copy package files for Node.js dependencies
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm install
 
 # Copy the application code into the container
 COPY . .
 
-# Install application dependencies without interaction and optimize autoload files
-RUN composer install --no-interaction --optimize-autoloader
+# Run composer scripts after copying all files
+RUN composer run-script post-autoload-dump
+
+# Build frontend assets
+RUN npm run prod
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
