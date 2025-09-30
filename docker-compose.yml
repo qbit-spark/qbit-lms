@@ -30,7 +30,7 @@ services:
             MYSQL_USER: user
             MYSQL_PASSWORD: pass
         ports:
-            - "3330:3306"
+            - "33320:3306"
         volumes:
             - elibrary-db-data:/var/lib/mysql
         networks:
@@ -48,8 +48,7 @@ services:
             - "traefik.http.services.elibrary.loadbalancer.server.port=80"
             - "traefik.docker.network=traefik-network"
         ports:
-            - "89:80" # HTTP port
-            # - "443:443" # Uncomment this for HTTPS (SSL) support
+            - "8909:80" # HTTP port
         volumes:
             - .:/var/www:cached
             - ./docker-compose/nginx:/etc/nginx/conf.d

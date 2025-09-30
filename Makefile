@@ -4,7 +4,8 @@ setup:
 	@make set-permissions
 	@make setup-env
 	@make generate-key
-	@make migrate-fresh-seed
+	@make migrate
+	@make db-seed
 	@make npm-install
 	@make npm-run-dev
 
@@ -36,5 +37,8 @@ npm-run-dev:
 generate-key:
 	docker exec elibrary-app bash -c "php artisan key:generate"
 
-migrate-fresh-seed:
-	docker exec elibrary-app bash -c "php artisan migrate:fresh --seed"
+migrate:
+	docker exec elibrary-app bash -c "php artisan migrate"
+
+db-seed:
+	docker exec elibrary-app bash -c "php artisan db:seed"
