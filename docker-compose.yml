@@ -1,4 +1,3 @@
-version: "4.0"
 
 services:
     app:
@@ -8,7 +7,6 @@ services:
         image: elibrary-app
         container_name: elibrary-app
         restart: unless-stopped
-        working_dir: /var/www/app
         volumes:
             - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed
         networks:
@@ -39,7 +37,6 @@ services:
         ports:
             - "8909:80" # HTTP port
         volumes:
-            - elibrary-cache-data:/var/www/app:cached
             - ./docker-compose/nginx:/etc/nginx/conf.d
         depends_on:
             - app
@@ -62,4 +59,3 @@ networks:
 
 volumes:
     elibrary-db-data:
-    elibrary-cache-data:
