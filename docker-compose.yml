@@ -8,7 +8,6 @@ services:
         image: elibrary-app
         container_name: elibrary-app
         restart: unless-stopped
-        working_dir: /var/www
         volumes:
             - elibrary-app-data:/var/www
             - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed

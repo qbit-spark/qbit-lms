@@ -35,7 +35,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the application code into the container
-COPY . ./
+COPY . .
 
 # Run composer scripts after copying all files
 RUN composer run-script post-autoload-dump
