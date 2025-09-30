@@ -40,7 +40,7 @@ services:
         ports:
             - "8909:80" # HTTP port
         volumes:
-            - elibrary-cache-data:/var/www:cached
+            - elibrary-cache-data:/var/www/app:cached
             - ./docker-compose/nginx:/etc/nginx/conf.d
         depends_on:
             - app
