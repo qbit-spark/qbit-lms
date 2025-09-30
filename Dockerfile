@@ -2,7 +2,7 @@
 FROM php:8.2-fpm
 
 # Set the working directory inside the container
-WORKDIR /var/www
+WORKDIR /var/www/app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -22,23 +22,17 @@ RUN apt-get clean \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy composer files first for better layer caching
-COPY composer.json composer.lock ./
+# Copy the application code into the container
+COPY . ./
 
 # Install PHP dependencies (will be cached if composer files haven't changed)
 RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloader
 
-# Copy package files for Node.js dependencies
-COPY package*.json ./
+# Run composer scripts after copying all files
+RUN composer run-script post-autoload-dump
 
 # Install Node.js dependencies
 RUN npm install
-
-# Copy the application code into the container
-COPY . .
-
-# Run composer scripts after copying all files
-RUN composer run-script post-autoload-dump
 
 # Build frontend assets
 RUN npm run prod
