@@ -14,8 +14,8 @@ docker-up-build:
 	docker compose up -d --build
 
 set-permissions:
-	docker exec -it elibrary-app bash -c "chmod -R 777 /var/www/storage"
-	docker exec -it elibrary-app bash -c "chmod -R 777 /var/www/bootstrap"
+	docker exec -it elibrary-app bash -c "chmod -R 777 storage"
+	docker exec -it elibrary-app bash -c "chmod -R 777 bootstrap"
 
 setup-env:
 	docker exec -it elibrary-app bash -c "cp .env.docker .env"
