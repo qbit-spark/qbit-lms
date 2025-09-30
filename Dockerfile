@@ -23,7 +23,7 @@ RUN apt-get clean \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy the application code into the container
-COPY . ./
+COPY . .
 
 # Install PHP dependencies (will be cached if composer files haven't changed)
 RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloader
