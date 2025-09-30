@@ -42,7 +42,7 @@ services:
             - "traefik.http.routers.elibrary.rule=Host(`elibrary.aicttaborachoir.co.tz`)"
             - "traefik.http.routers.elibrary.entrypoints=websecure"
             - "traefik.http.routers.elibrary.tls.certresolver=letsencrypt"
-            - "traefik.http.services.elibrary.loadbalancer.server.port=8909"
+            - "traefik.http.services.elibrary.loadbalancer.server.port=80"
             - "traefik.docker.network=traefik-network"
         ports:
             - "8909:80" # HTTP port
