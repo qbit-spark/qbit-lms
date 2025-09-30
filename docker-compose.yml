@@ -10,7 +10,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www
         volumes:
-            - .:/var/www
+            - elibrary-app-data:/var/www
             - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed
         networks:
             - elibrary-network
@@ -50,7 +50,7 @@ services:
         ports:
             - "8909:80" # HTTP port
         volumes:
-            - .:/var/www:cached
+            - elibrary-cache-data:/var/www:cached
             - ./docker-compose/nginx:/etc/nginx/conf.d
         depends_on:
             - app
@@ -72,7 +72,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www
         volumes:
-            - ./:/var/www
+            - elibrary-node-data:/var/www
             - /var/www/node_modules
         networks:
             - elibrary-network
@@ -85,3 +85,6 @@ networks:
 
 volumes:
     elibrary-db-data:
+    elibrary-cache-data:
+    elibrary-node-data:
+    elibrary-app-data:

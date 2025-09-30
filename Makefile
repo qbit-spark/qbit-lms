@@ -38,7 +38,7 @@ generate-key:
 	docker exec elibrary-app bash -c "php artisan key:generate"
 
 migrate:
-	docker exec elibrary-app bash -c "php artisan migrate"
+	docker exec elibrary-app bash -c "php artisan migrate:fresh"
 
 db-seed:
 	docker exec elibrary-app bash -c "php artisan db:seed"
