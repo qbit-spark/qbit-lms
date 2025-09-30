@@ -1,11 +1,11 @@
 setup:
 	@make docker-up-build
-	@make composer-install
 	@make set-permissions
 	@make setup-env
 	@make generate-key
 	@make migrate
 	@make db-seed
+	@make app-optimize
 
 docker-stop:
 	docker compose stop
@@ -28,3 +28,6 @@ migrate:
 
 db-seed:
 	docker exec -it elibrary-app bash -c "php artisan db:seed"
+
+app-optimize:
+	docker exec -it elibrary-app bash -c "php artisan optimize:clear"
