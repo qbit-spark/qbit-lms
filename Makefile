@@ -15,26 +15,26 @@ docker-up-build:
 	docker compose up -d --build
 
 composer-install:
-	docker exec lms-app bash -c "composer install"
+	docker exec elibrary-app bash -c "composer install"
 
 composer-update:
-	docker exec lms-app bash -c "composer update"
+	docker exec elibrary-app bash -c "composer update"
 
 set-permissions:
-	docker exec lms-app bash -c "chmod -R 777 /var/www/storage"
-	docker exec lms-app bash -c "chmod -R 777 /var/www/bootstrap"
+	docker exec elibrary-app bash -c "chmod -R 777 /var/www/storage"
+	docker exec elibrary-app bash -c "chmod -R 777 /var/www/bootstrap"
 
 setup-env:
-	docker exec lms-app bash -c "cp .env.docker .env"
+	docker exec elibrary-app bash -c "cp .env.docker .env"
 
 npm-install:
-	docker exec lms-node bash -c "npm install"
+	docker exec elibrary-node bash -c "npm install"
 
 npm-run-dev:
-	docker exec lms-node bash -c "npm run prod"
+	docker exec elibrary-node bash -c "npm run prod"
 
 generate-key:
-	docker exec lms-app bash -c "php artisan key:generate"
+	docker exec elibrary-app bash -c "php artisan key:generate"
 
 migrate-fresh-seed:
-	docker exec lms-app bash -c "php artisan migrate:fresh --seed"
+	docker exec elibrary-app bash -c "php artisan migrate:fresh --seed"

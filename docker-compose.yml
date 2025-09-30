@@ -5,15 +5,15 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: lms-app
-        container_name: lms-app
+        image: elibrary-app
+        container_name: elibrary-app
         restart: unless-stopped
         working_dir: /var/www
         volumes:
             - .:/var/www
             - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed
         networks:
-            - lms-network
+            - elibrary-network
         depends_on:
             - db
         environment:
@@ -22,24 +22,31 @@ services:
 
     db:
         image: mysql:8.0
-        container_name: lms-db
+        container_name: elibrary-db
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: lms
+            MYSQL_DATABASE: elibrary
             MYSQL_USER: user
             MYSQL_PASSWORD: pass
         ports:
-            - "3306:3306"
+            - "3330:3306"
         volumes:
-            - db-data:/var/lib/mysql
+            - elibrary-db-data:/var/lib/mysql
         networks:
-            - lms-network
+            - elibrary-network
 
     nginx:
         image: nginx:alpine
-        container_name: lms-nginx
+        container_name: elibrary-nginx
         restart: unless-stopped
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.elibrary.rule=Host(`elibrary.aicttaborachoir.co.tz`)"
+            - "traefik.http.routers.elibrary.entrypoints=websecure"
+            - "traefik.http.routers.elibrary.tls.certresolver=letsencrypt"
+            - "traefik.http.services.elibrary.loadbalancer.server.port=80"
+            - "traefik.docker.network=traefik-network"
         ports:
             - "89:80" # HTTP port
             # - "443:443" # Uncomment this for HTTPS (SSL) support
@@ -49,7 +56,8 @@ services:
         depends_on:
             - app
         networks:
-            - lms-network
+            - elibrary-network
+            - traefik-network
 
     node:
         # Optional platform flag for Mac Silicon (M1/M2/M3)
@@ -57,22 +65,24 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.node
-        image: lms-node
-        container_name: lms-node
+        image: elibrary-node
+        container_name: elibrary-node
         ports:
-            - "3000:3000"
-            - "3001:3001"
+            - "3111:3000"
+            - "3101:3001"
         restart: unless-stopped
         working_dir: /var/www
         volumes:
             - ./:/var/www
             - /var/www/node_modules
         networks:
-            - lms-network
+            - elibrary-network
 
 networks:
-    lms-network:
+    traefik-network:
+        external: true
+    elibrary-network:
         driver: bridge
 
 volumes:
-    db-data:
+    elibrary-db-data:
