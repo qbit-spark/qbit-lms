@@ -58,25 +58,6 @@ services:
             - elibrary-network
             - traefik-network
 
-    node:
-        # Optional platform flag for Mac Silicon (M1/M2/M3)
-        platform: linux/amd64
-        build:
-            context: .
-            dockerfile: Dockerfile.node
-        image: elibrary-node
-        container_name: elibrary-node
-        ports:
-            - "3111:3000"
-            - "3101:3001"
-        restart: unless-stopped
-        working_dir: /var/www
-        volumes:
-            - elibrary-node-data:/var/www
-            - /var/www/node_modules
-        networks:
-            - elibrary-network
-
 networks:
     traefik-network:
         external: true
@@ -86,5 +67,4 @@ networks:
 volumes:
     elibrary-db-data:
     elibrary-cache-data:
-    elibrary-node-data:
     elibrary-app-data:

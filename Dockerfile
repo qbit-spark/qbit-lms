@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   libfreetype6-dev \
   libzip-dev \
   unzip \
+  nodejs \
   git \
   && docker-php-ext-configure gd --with-freetype --with-jpeg \
   && docker-php-ext-install gd zip pdo pdo_mysql
