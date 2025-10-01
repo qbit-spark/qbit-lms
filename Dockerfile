@@ -2,7 +2,7 @@
 FROM php:8.2-fpm
 
 # Set the working directory inside the container
-WORKDIR /var/www/app
+WORKDIR /var/www
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -23,7 +23,7 @@ RUN apt-get clean \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy the application code into the container
-COPY . .
+COPY . ./
 
 # Install PHP dependencies (will be cached if composer files haven't changed)
 RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloader
@@ -32,10 +32,7 @@ RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloade
 RUN composer run-script post-autoload-dump
 
 # Install Node.js dependencies
-RUN npm install
-
-# Build frontend assets
-RUN npm run prod
+RUN npm install && npm run prod
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000

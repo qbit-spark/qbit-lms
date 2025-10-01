@@ -2,12 +2,15 @@
 services:
     app:
         build:
+            context: .
             dockerfile: Dockerfile
         image: elibrary-app
         container_name: elibrary-app
-        restart: unless-stopped
+        working_dir: /var/www
         volumes:
-            - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed
+            - elibrary-project:/var/www
+            - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        restart: unless-stopped # PHP config if needed
         networks:
             - elibrary-network
         depends_on:
@@ -36,6 +39,7 @@ services:
         ports:
             - "8909:80" # HTTP port
         volumes:
+            - .:/var/www:cached
             - ./docker-compose/nginx:/etc/nginx/conf.d
         depends_on:
             - app
@@ -58,3 +62,4 @@ networks:
 
 volumes:
     elibrary-db-data:
+    elibrary-project:
