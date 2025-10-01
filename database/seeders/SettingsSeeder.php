@@ -15,7 +15,10 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         if (settings::count() == 0) {
-            settings::factory(1)->create();
+            settings::create([
+                'return_days' => 20,
+                'fine' => 5
+            ]);
         }
     }
 }
