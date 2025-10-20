@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class book extends Model
@@ -19,7 +20,7 @@ class book extends Model
      */
     public function auther(): BelongsTo
     {
-        return $this->belongsTo(auther::class,'auther_id','id');
+        return $this->belongsTo(auther::class, 'auther_id', 'id');
     }
 
     /**
@@ -42,6 +43,32 @@ class book extends Model
         return $this->belongsTo(publisher::class);
     }
 
+      /**
+     * Get the publisher that owns the book
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bookIssues(): HasMany
+    {
+        return $this->hasMany(book_issue::class);
+    }
 
+    public function isBookAvailable(): bool
+    {
+        return $this->current_stock > 0;
+    }
 
+    public function  onBookIssued()
+    {
+        $this->decrement('current_stock');
+        if($this->refresh()->current_stock <= 0){
+            $this->status = 'N';
+            $this->save();
+        }
+    }
+
+    public function  onBookReturned()
+    {
+        $this->increment('current_stock');
+    }
 }

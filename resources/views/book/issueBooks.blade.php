@@ -43,12 +43,12 @@
                                         @endif
                                     </td>
                                     <td class="edit">
-                                        <a href="{{ route('book_issue.edit', $book->id) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('book_issue.edit', $book->id) }}" class="btn btn-success"> <x-eye-icon /> </a>
                                     </td>
                                     <td class="delete">
                                         <form action="{{ route('book_issue.destroy', $book) }}" method="post"
                                             class="form-hidden">
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-danger"> <x-trash-icon /> </button>
                                             @csrf
                                         </form>
                                     </td>

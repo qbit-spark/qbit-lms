@@ -21,6 +21,7 @@
                             <th>Category</th>
                             <th>Author</th>
                             <th>Publisher</th>
+                            <th>Stock</th>
                             <th>Status</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -33,6 +34,7 @@
                                     <td>{{ $book->category->name }}</td>
                                     <td>{{ $book->auther->name }}</td>
                                     <td>{{ $book->publisher->name }}</td>
+                                    <td>{{ $book->current_stock }}</td>
                                     <td>
                                         @if ($book->status == 'Y')
                                             <span class='badge badge-success'>Available</span>
@@ -41,12 +43,16 @@
                                         @endif
                                     </td>
                                     <td class="edit">
-                                        <a href="{{ route('book.edit', $book) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('book.edit', $book) }}" class="btn btn-success">
+                                            <x-edit-icon />
+                                        </a>
                                     </td>
                                     <td class="delete">
                                         <form action="{{ route('book.destroy', $book) }}" method="post"
                                             class="form-hidden">
-                                            <button class="btn btn-danger delete-book">Delete</button>
+                                            <button class="btn btn-danger delete-book">
+                                                <x-trash-icon />
+                                            </button>
                                             @csrf
                                         </form>
                                     </td>

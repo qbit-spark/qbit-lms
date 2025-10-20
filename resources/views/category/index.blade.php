@@ -26,12 +26,12 @@
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td class="edit">
-                                        <a href="{{ route('category.edit', $category) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('category.edit', $category) }}" class="btn btn-success"> <x-edit-icon /> </a>
                                     </td>
                                     <td class="delete">
                                         <form action="{{ route('category.destroy', $category) }}" method="post"
                                             class="form-hidden">
-                                            <button class="btn btn-danger delete-author">Delete</button>
+                                            <button class="btn btn-danger delete-author"><x-trash-icon /></button>
                                             @csrf
                                         </form>
                                     </td>

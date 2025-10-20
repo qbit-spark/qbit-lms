@@ -12,6 +12,20 @@
             </div>
             <div class="row">
                 <div class="offset-md-3 col-md-6">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                     @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-3 col-md-6">
                     <form class="yourform" action="{{ route('book_issue.create') }}" method="post"
                         autocomplete="off">
                         @csrf

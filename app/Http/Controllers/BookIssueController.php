@@ -21,7 +21,7 @@ class BookIssueController extends Controller
     public function index()
     {
         return view('book.issueBooks', [
-            'books' => book_issue::Paginate(5)
+            'books' => book_issue::latest()->paginate(15)
         ]);
     }
 
@@ -34,7 +34,7 @@ class BookIssueController extends Controller
     {
         return view('book.issueBook_add', [
             'students' => student::latest()->get(),
-            'books' => book::where('status', 'Y')->get(),
+            'books' => book::where('status', 'Y')->orderBy('name')->get(),
         ]);
     }
 
@@ -48,6 +48,14 @@ class BookIssueController extends Controller
     {
         $issue_date = date('Y-m-d');
         $return_date = date('Y-m-d', strtotime("+" . (settings::latest()->first()->return_days) . " days"));
+        
+        $book = book::find($request->book_id);
+
+        // Check if book is available
+        if($book->isBookAvailable() == false){
+            return redirect()->back()->with('error', 'The selected book is not available for issue. Out of Stock');
+        }
+
         $data = book_issue::create($request->validated() + [
             'student_id' => $request->student_id,
             'book_id' => $request->book_id,
@@ -56,9 +64,9 @@ class BookIssueController extends Controller
             'issue_status' => 'N',
         ]);
         $data->save();
-        $book = book::find($request->book_id);
-        $book->status = 'N';
-        $book->save();
+        $book->onBookIssued();
+        
+
         return redirect()->route('book_issued');
     }
 
@@ -95,9 +103,12 @@ class BookIssueController extends Controller
         $book->issue_status = 'Y';
         $book->return_day = now();
         $book->save();
+
         $bookk = book::find($book->book_id);
-        $bookk->status= 'Y';
+        $bookk->status = 'Y';
         $bookk->save();
+        $bookk->onBookReturned();
+
         return redirect()->route('book_issued');
     }
 

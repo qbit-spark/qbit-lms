@@ -33,16 +33,16 @@
                                     <td>{{ $student->phone }}</td>
                                     <td>{{ $student->email }}</td>
                                     <td class="view">
-                                        <button data-sid='{{ $student->id }}>'
-                                            class="btn btn-primary view-btn">View</button>
+                                        <button data-sids='{{ $student->id }}'
+                                            class="btn btn-primary view-btn"> <x-eye-icon /> </button>
                                     </td>
                                     <td class="edit">
-                                        <a href="{{ route('student.edit', $student) }}>" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('student.edit', $student) }}>" class="btn btn-success"> <x-edit-icon /> </a>
                                     </td>
                                     <td class="delete">
                                         <form action="{{ route('student.destroy', $student->id) }}" method="post"
                                             class="form-hidden">
-                                            <button class="btn btn-danger delete-student">Delete</button>
+                                            <button class="btn btn-danger delete-student"> <x-trash-icon /> </button>
                                             @csrf
                                         </form>
                                     </td>
@@ -71,7 +71,7 @@
     <script type="text/javascript">
         //Show shudent detail
         $(".view-btn").on("click", function() {
-            var student_id = $(this).data("sid");
+            var student_id = $(this).data("sids");
             $.ajax({
                 url: "http://127.0.0.1:8000/student/show/"+student_id,
                 type: "get",

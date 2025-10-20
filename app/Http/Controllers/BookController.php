@@ -20,7 +20,7 @@ class BookController extends Controller
     {
 
         return view('book.index', [
-            'books' => book::Paginate(5)
+            'books' => book::latest()->paginate(15)
         ]);
     }
 
@@ -83,6 +83,7 @@ class BookController extends Controller
         $book->auther_id = $request->author_id;
         $book->category_id = $request->category_id;
         $book->publisher_id = $request->publisher_id;
+        $book->current_stock = $request->current_stock;
         $book->save();
         return redirect()->route('books');
     }

@@ -26,12 +26,12 @@
                                     <td>{{ $publisher->id }}</td>
                                     <td>{{ $publisher->name }}</td>
                                     <td class="edit">
-                                        <a href="{{ route('publisher.edit', $publisher) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('publisher.edit', $publisher) }}" class="btn btn-success"> <x-edit-icon /> </a>
                                     </td>
                                     <td class="delete">
                                         <form action="{{ route('publisher.destroy', $publisher) }}" method="post"
                                             class="form-hidden">
-                                            <button class="btn btn-danger delete-author">Delete</button>
+                                            <button class="btn btn-danger delete-author"> <x-trash-icon /> </button>
                                             @csrf
                                         </form>
                                     </td>
