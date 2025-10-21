@@ -42,7 +42,7 @@ class ReportsController extends Controller
     public function not_returned()
     {
         return view('report.notReturned',[
-            'books' => book_issue::latest()->get()
+            'books' => book_issue::where('issue_status','N')->latest()->get()
         ]);
     }
 }
