@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <a href="{{ route('reports.date_wise') }}" class="card-link">
@@ -17,16 +17,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
-                            <a href="{{ route('reports.month_wise') }}" class="card-link">
-                                <h5 class="card-title mb-0">Monthly Wise Report</h5>
+                            <a href="{{ route('reports.week_wise') }}" class="card-link">
+                                <h5 class="card-title mb-0">Weekly Report</h5>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body text-center">
+                            <a href="{{ route('reports.month_wise') }}" class="card-link">
+                                <h5 class="card-title mb-0">Monthly Report</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body text-center">
+                            <a href="{{ route('reports.date_range') }}" class="card-link">
+                                <h5 class="card-title mb-0">Date Range Report</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
                             <a href="{{ route('reports.not_returned') }}" class="card-link">
