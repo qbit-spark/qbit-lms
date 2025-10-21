@@ -43,6 +43,24 @@
                 <div class="col-md-3">
                     <div class="card" style="width: 14rem; margin: 0 auto;">
                         <div class="card-body text-center">
+                            <p class="card-text">{{ $bookCollections }}</p>
+                            <h5 class="card-title mb-0">Available Books</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div class="col-md-3">
+                    <div class="card" style="width: 14rem; margin: 0 auto;">
+                        <div class="card-body text-center">
+                            <p class="card-text">{{ $damagedBooks }}</p>
+                            <h5 class="card-title mb-0">Damaged Books</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card" style="width: 14rem; margin: 0 auto;">
+                        <div class="card-body text-center">
                             <p class="card-text">{{ $students }}</p>
                             <h5 class="card-title mb-0">Register Members</h5>
                         </div>

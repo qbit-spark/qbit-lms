@@ -6,6 +6,7 @@ use App\Http\Requests\changePasswordRequest;
 use App\Models\auther;
 use App\Models\book;
 use App\Models\book_issue;
+use App\Models\BrokenBook;
 use App\Models\category;
 use App\Models\publisher;
 use App\Models\student;
@@ -21,8 +22,10 @@ class dashboardController extends Controller
             'publishers' => publisher::count(),
             'categories' => category::count(),
             'books' => book::count(),
+            'bookCollections' => book::sum('current_stock'),
             'students' => student::count(),
-            'issued_books' => book_issue::count(),
+            'issued_books' => book_issue::where('issue_status','N')->count(),
+            'damagedBooks' => BrokenBook::where('deduct_status','deducted')->whereIn('status',['pending','under_repair'])->sum('damaged_quantity'),
         ]);
     }
 

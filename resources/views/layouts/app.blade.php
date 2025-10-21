@@ -48,6 +48,7 @@
                         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ route('authors') }}">Authors</a></li>
                         <li><a href="{{ route('publishers') }}">Publishers</a></li>
+                        <li><a class="" href="{{ route('stock-take.index') }}">Stock Take</a></li>
                         <li><a href="{{ route('categories') }}">Categories</a></li>
                         <li><a href="{{ route('books') }}">Books</a></li>
                         <li><a href="{{ route('students') }}">Reg Members</a></li>

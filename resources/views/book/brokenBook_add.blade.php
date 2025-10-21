@@ -100,7 +100,7 @@
                         </div>
 
                         <!-- Damage Date -->
-                        <div class="form-group col-md-6 mt-3">
+                        <div class="form-group mt-3">
                                 <label>Damage Date</label>
                                 <input type="date" class="form-control" name="damage_date"
                                     value="{{ old('damage_date', date('Y-m-d')) }}" required>
