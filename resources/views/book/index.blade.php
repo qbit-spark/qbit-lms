@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div id="admin-content">
         <div class="container">
             <div class="row">
@@ -23,8 +22,7 @@
                             <th>Publisher</th>
                             <th>Stock</th>
                             <th>Status</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             @forelse ($books as $book)
@@ -42,19 +40,22 @@
                                             <span class='badge badge-danger'>Issued</span>
                                         @endif
                                     </td>
-                                    <td class="edit">
-                                        <a href="{{ route('book.edit', $book) }}" class="btn btn-success">
-                                            <x-edit-icon />
-                                        </a>
-                                    </td>
                                     <td class="delete">
-                                        <form action="{{ route('book.destroy', $book) }}" method="post"
-                                            class="form-hidden">
-                                            <button class="btn btn-danger delete-book">
-                                                <x-trash-icon />
-                                            </button>
-                                            @csrf
-                                        </form>
+                                        <div class="d-flex flex-row">
+                                            {{-- <a href="{{ route('book.show', $book) }}"  title="Record Broken" class="btn btn-info mx-1">
+                                                <x-tool-icon />
+                                            </a> --}}
+                                            <a href="{{ route('book.edit', $book) }}" class="btn btn-success mx-1">
+                                                <x-edit-icon />
+                                            </a>
+                                            <form action="{{ route('book.destroy', $book) }}" method="post"
+                                                class="form-hidden">
+                                                <button class="btn btn-danger delete-book mx-1">
+                                                    <x-trash-icon />
+                                                </button>
+                                                @csrf
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty

@@ -81,7 +81,7 @@
                          <div class="form-group">
                             <label>Current Stocks</label>
                             <input type="number" class="form-control @error('current_stock') isinvalid @enderror"
-                                placeholder="Current Stocks" name="current_stock"  value="{{ old('current_stock') }}" required>
+                                placeholder="Current Stocks" name="current_stock" value="{{ $book->current_stock }}"required>
                             @error('current_stock')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}

@@ -4,12 +4,14 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\AutherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookIssueController;
+use App\Http\Controllers\BrokenBookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StudentController;
+use App\Models\BrokenBook;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -68,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/books', [BookController::class, 'index'])->name('books');
     Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
     Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
+    Route::get('/book/show/{book}', [BookController::class, 'show'])->name('book.show');
     Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::post('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::post('/book/create', [BookController::class, 'store'])->name('book.store');
@@ -89,6 +92,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/book-issue/update/{id}', [BookIssueController::class, 'update'])->name('book_issue.update');
     Route::post('/book-issue/delete/{id}', [BookIssueController::class, 'destroy'])->name('book_issue.destroy');
     Route::post('/book-issue/create', [BookIssueController::class, 'store'])->name('book_issue.store');
+
+
+    Route::get('/broken-book', [BrokenBookController::class, 'index'])->name('broken-book');
+    Route::get('/broken-book/create', [BrokenBookController::class, 'create'])->name('broken-book.create');
+    Route::get('/broken-book/edit/{id}', [BrokenBookController::class, 'edit'])->name('broken-book.edit');
+    Route::patch('/broken-book/update/{id}', [BrokenBookController::class, 'update'])->name('broken-book.update');
+    Route::post('/broken-book/delete/{id}', [BrokenBookController::class, 'destroy'])->name('broken-book.destroy');
+    Route::post('/broken-book/create', [BrokenBookController::class, 'store'])->name('broken-book.store');
 
     Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
     Route::get('/reports/Date-Wise', [ReportsController::class, 'date_wise'])->name('reports.date_wise');

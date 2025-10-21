@@ -13,7 +13,7 @@
                         <table class="content-table">
                             <thead>
                                 <th>S.No</th>
-                                <th>Student Name</th>
+                                <th>Member Name</th>
                                 <th>Book Name</th>
                                 <th>Phone</th>
                                 <th>Email</th>

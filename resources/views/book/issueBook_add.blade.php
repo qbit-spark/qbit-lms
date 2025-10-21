@@ -30,7 +30,7 @@
                         autocomplete="off">
                         @csrf
                         <div class="form-group">
-                            <label>Student Name</label>
+                            <label>Member Name</label>
                             <select class="form-control" name="student_id" required>
                                 <option value="">Select Name</option>
                                 @foreach ($students as $student)

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <h2 class="admin-heading">Update Student</h2>
+                    <h2 class="admin-heading">Update Member</h2>
                 </div>
             </div>
             <div class="row">
@@ -13,10 +13,25 @@
                         autocomplete="off">
                         @csrf
                         <div class="form-group">
-                            <label>Student Name</label>
-                            <input type="text" class="form-control" placeholder="Student Name" name="name"
+                            <label>Member Name</label>
+                            <input type="text" class="form-control" placeholder="Member Name" name="name"
                                 value="{{ $student->name }}" required>
                             @error('name')
+                                <div class="alert alert-danger" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                         <div class="form-group">
+                            <label>Category</label>
+                            <select name="category" class="form-control">
+                                @if ($student->category == 'Student')
+                                     <option value="Student" selected>Student</option>
+                                @else
+                                      <option value="Staff" selected>Staff</option>
+                                @endif
+                            </select>
+                            @error('category')
                                 <div class="alert alert-danger" role="alert">
                                     {{ $message }}
                                 </div>
@@ -35,7 +50,7 @@
                         <div class="form-group">
                             <label>Gender</label>
                             <select name="gender" class="form-control">
-                                @if ($student->gneder == 'male')
+                                @if ($student->gender == 'male')
                                     <option value="male" selected>Male</option>
                                 @else
                                     <option value="female" selected>Female</option>

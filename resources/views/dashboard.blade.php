@@ -44,7 +44,7 @@
                     <div class="card" style="width: 14rem; margin: 0 auto;">
                         <div class="card-body text-center">
                             <p class="card-text">{{ $students }}</p>
-                            <h5 class="card-title mb-0">Register Students</h5>
+                            <h5 class="card-title mb-0">Register Members</h5>
                         </div>
                     </div>
                 </div>

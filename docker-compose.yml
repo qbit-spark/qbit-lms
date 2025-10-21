@@ -26,7 +26,7 @@ services:
             MYSQL_USER: user
             MYSQL_PASSWORD: pass
         ports:
-            - "33320:3306"
+            - "33340:3306"
         volumes:
             - elibrary-db-data:/var/lib/mysql
         networks:
